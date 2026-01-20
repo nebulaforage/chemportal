@@ -6,10 +6,16 @@ RUN docker-php-ext-install mysqli
 # Enable Apache rewrite
 RUN a2enmod rewrite
 
-# Copy project files
+# Configure Apache to listen on Railway PORT
+RUN sed -i 's/80/${PORT}/g' /etc/apache2/ports.conf \
+ && sed -i 's/:80/:${PORT}/g' /etc/apache2/sites-available/000-default.conf
+
+# Copy app files
 COPY . /var/www/html/
 
-# Set permissions
+# Permissions
 RUN chown -R www-data:www-data /var/www/html
 
-EXPOSE 80
+EXPOSE ${PORT}
+
+CMD ["apache2-foreground"]
