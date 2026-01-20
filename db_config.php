@@ -1,24 +1,24 @@
 <?php
-$DB_HOST = getenv('MYSQLHOST');
-$DB_PORT = getenv('MYSQLPORT');
-$DB_USER = getenv('MYSQLUSER');
-$DB_PASS = getenv('MYSQLPASSWORD');
-$DB_NAME = getenv('MYSQL_DATABASE');
+// db_config.php (Railway-safe)
 
-if (!$DB_HOST || !$DB_PORT || !$DB_USER || !$DB_PASS || !$DB_NAME) {
-    die("Database environment variables not set.");
+$databaseUrl = getenv('MYSQL_PUBLIC_URL');
+
+if (!$databaseUrl) {
+    die('Database environment variables not set.');
 }
 
-$mysqli = new mysqli(
-    $DB_HOST,
-    $DB_USER,
-    $DB_PASS,
-    $DB_NAME,
-    (int)$DB_PORT
-);
+$db = parse_url($databaseUrl);
+
+$DB_HOST = $db['host'];
+$DB_PORT = $db['port'];
+$DB_USER = $db['user'];
+$DB_PASS = $db['pass'];
+$DB_NAME = ltrim($db['path'], '/');
+
+$mysqli = new mysqli($DB_HOST, $DB_USER, $DB_PASS, $DB_NAME, $DB_PORT);
 
 if ($mysqli->connect_error) {
-    die("Database connection failed: " . $mysqli->connect_error);
+    die('Database connection failed: ' . $mysqli->connect_error);
 }
 
-$mysqli->set_charset("utf8mb4");
+$mysqli->set_charset('utf8mb4');
