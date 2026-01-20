@@ -1,13 +1,13 @@
 <?php
-// db_config.php — Railway-compatible
+// db_config.php — Railway FINAL FIX
 
 $host = getenv('MYSQLHOST');
 $port = getenv('MYSQLPORT');
-$db   = getenv('MYSQLDATABASE');
+$db   = getenv('MYSQL_DATABASE');   // ✅ underscore FIX
 $user = getenv('MYSQLUSER');
 $pass = getenv('MYSQLPASSWORD');
 
-// Validate environment variables
+// Debug safety check
 if (!$host || !$port || !$db || !$user || !$pass) {
     die('Database environment variables not set.');
 }
