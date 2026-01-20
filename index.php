@@ -18,7 +18,7 @@ require_once 'partials/header.php';
                         <h1 class="display-6 fw-semibold mb-3">Chemical Inventory Portal</h1>
                         <p class="mb-4 text-secondary">
                             Securely track laboratory and industrial chemicals with role-based access,
-                            expiry &amp; safety alerts, and a modern  dashboard experience.
+                            expiry &amp; safety alerts, and a modern dashboard experience.
                         </p>
                         <div class="d-flex flex-wrap gap-2 mb-4">
                             <span class="badge rounded-pill bg-info-subtle text-info">Role-based Access</span>
@@ -37,6 +37,7 @@ require_once 'partials/header.php';
                 </div>
             </div>
         </div>
+
         <div class="col-md-5 mb-4 fade-in-up">
             <div class="glass-card dashboard-panel p-4">
                 <div class="dashboard-panel-inner">
@@ -55,7 +56,8 @@ require_once 'partials/header.php';
                             <span class="fs-5 fw-semibold text-danger">Highlighted</span>
                         </div>
                         <small class="text-secondary">
-                            Sign in as <strong>Admin</strong> for full control, or <strong>Guest</strong> for safe, read-only exploration.
+                            Sign in as <strong>Admin</strong> for full control,
+                            or <strong>Guest</strong> for safe, read-only exploration.
                         </small>
                     </div>
                 </div>
@@ -65,4 +67,3 @@ require_once 'partials/header.php';
 </div>
 
 <?php require_once 'partials/footer.php'; ?>
-
