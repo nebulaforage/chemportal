@@ -1,21 +1,17 @@
 <?php
-// db_config.php (Railway-safe)
+// db_config.php — Railway MySQL connection
 
-$databaseUrl = getenv('MYSQL_PUBLIC_URL');
+$host = getenv('MYSQLHOST');
+$user = getenv('MYSQLUSER');
+$pass = getenv('MYSQLPASSWORD');
+$db   = getenv('MYSQLDATABASE');
+$port = getenv('MYSQLPORT') ?: 3306;
 
-if (!$databaseUrl) {
+if (!$host || !$user || !$pass || !$db) {
     die('Database environment variables not set.');
 }
 
-$db = parse_url($databaseUrl);
-
-$DB_HOST = $db['host'];
-$DB_PORT = $db['port'];
-$DB_USER = $db['user'];
-$DB_PASS = $db['pass'];
-$DB_NAME = ltrim($db['path'], '/');
-
-$mysqli = new mysqli($DB_HOST, $DB_USER, $DB_PASS, $DB_NAME, $DB_PORT);
+$mysqli = new mysqli($host, $user, $pass, $db, $port);
 
 if ($mysqli->connect_error) {
     die('Database connection failed: ' . $mysqli->connect_error);
